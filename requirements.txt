@@ -2,3 +2,7 @@ streamlit
 pandas
 numpy
 altair
+matplotlib
+seaborn
+scikit-learn
+ipykernel
