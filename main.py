@@ -148,5 +148,3 @@ if tipo == "Não potáveis":
 
 with st.expander("Amostra dos dados brutos"):
     st.dataframe(base)
-
-st.balloons()
