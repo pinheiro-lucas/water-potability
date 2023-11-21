@@ -3,22 +3,36 @@ import pandas as pd
 import altair as alt
 
 base = pd.read_csv("data/water_potability.csv")
-medidas = {"ph": "Quantidade de PH", "Hardness": "Quantidade de cálcio e magnésio dissolvido", "Solids": "Quantidade de partículas sólidas", "Chloramines": "Quantidade de derivados de amônia e aminas orgânicas", "Sulfate": "Quantidade de sulfato", "Conductivity": "Condutividade", "Organic_carbon": "Quantidade de carbono", "Trihalomethanes": "Quantidade de trihalometanos (THMs)", "Turbidity": "Turbidez"}
+medidas = {
+    "ph": "Quantidade de PH",
+    "Hardness": "Quantidade de cálcio e magnésio dissolvido",
+    "Solids": "Quantidade de partículas sólidas",
+    "Chloramines": "Quantidade de derivados de amônia e aminas orgânicas",
+    "Sulfate": "Quantidade de sulfato",
+    "Conductivity": "Condutividade",
+    "Organic_carbon": "Quantidade de carbono",
+    "Trihalomethanes": "Quantidade de trihalometanos (THMs)",
+    "Turbidity": "Turbidez",
+}
 
-st.set_page_config(page_title="Potabilidade da água",
-                   page_icon="💦",
-                   layout="wide",
-                   initial_sidebar_state="expanded",
-                   menu_items={
-                       'Get Help': 'https://github.com/pinheiro-lucas/water-potability',
-                       'Report a bug': "https://github.com/pinheiro-lucas/water-potability",
-                       'About': "Teste"
-                   })
+st.set_page_config(
+    page_title="Potabilidade da água",
+    page_icon="💦",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        "Get Help": "https://github.com/pinheiro-lucas/water-potability",
+        "Report a bug": "https://github.com/pinheiro-lucas/water-potability",
+        "About": "Teste",
+    },
+)
 
 st.title("Potabilidade da água")
 st.header(f"{len(base.index)} amostras carregadas")
 
-tipo = st.selectbox("Selecione o tipo de amostras", ["Todas", "Potáveis", "Não potáveis"])
+tipo = st.selectbox(
+    "Selecione o tipo de amostras", ["Todas", "Potáveis", "Não potáveis"]
+)
 soma = base["Potability"].value_counts()
 
 if tipo == "Todas":
@@ -31,27 +45,33 @@ if tipo == "Todas":
 
         with col1:
             for k, v in medidas1.items():
-                st.altair_chart(alt.Chart(base).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(base)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col2:
             for k, v in medidas2.items():
-                st.altair_chart(alt.Chart(base).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(base)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col3:
             for k, v in medidas3.items():
-                st.altair_chart(alt.Chart(base).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(base)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
 if tipo == "Potáveis":
-    potaveis = base[base["Potability"]==1]
+    potaveis = base[base["Potability"] == 1]
     st.header(f"{len(potaveis.index)} amostras potáveis")
 
     with st.spinner("Carregando gráfico..."):
@@ -63,27 +83,33 @@ if tipo == "Potáveis":
 
         with col1:
             for k, v in medidas1.items():
-                st.altair_chart(alt.Chart(potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col2:
             for k, v in medidas2.items():
-                st.altair_chart(alt.Chart(potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col3:
             for k, v in medidas3.items():
-                st.altair_chart(alt.Chart(potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
 if tipo == "Não potáveis":
-    nao_potaveis = base[base["Potability"]==0]
+    nao_potaveis = base[base["Potability"] == 0]
     st.header(f"{len(nao_potaveis.index)} amostras não potáveis")
 
     with st.spinner("Carregando gráfico..."):
@@ -95,24 +121,30 @@ if tipo == "Não potáveis":
 
         with col1:
             for k, v in medidas1.items():
-                st.altair_chart(alt.Chart(nao_potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(nao_potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col2:
             for k, v in medidas2.items():
-                st.altair_chart(alt.Chart(nao_potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(nao_potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
         with col3:
             for k, v in medidas3.items():
-                st.altair_chart(alt.Chart(nao_potaveis).mark_bar().encode(
-                    alt.X(k, bin=True, title=v),
-                    y=alt.Y("count()", title="")
-                ).interactive())
+                st.altair_chart(
+                    alt.Chart(nao_potaveis)
+                    .mark_bar()
+                    .encode(alt.X(k, bin=True, title=v), y=alt.Y("count()", title=""))
+                    .interactive()
+                )
 
 with st.expander("Amostra dos dados brutos"):
     st.dataframe(base)
