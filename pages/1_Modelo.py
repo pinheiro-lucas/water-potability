@@ -47,12 +47,14 @@ with st.spinner("Carregando..."):
     st.header("Prever nova água")
     input_values = []
     for variavel in df.columns[:-1]:  # Excluindo a coluna 'Potability'
-        input_value = st.number_input(f"Insira o valor para {variavel}")
+        input_value = st.number_input(f"Insira o valor para {variavel}", step=0.0001, format="%.4f")
         input_values.append(input_value)
 
     # Botão para prever
     if st.button("Prever"):
         previsao = modelo.predict([input_values])[0]
-        resultado = "é potável" if previsao == 1 else "não é potável"
-        st.success(f"A água prevista {resultado}!")
+        if (previsao == 1):
+            st.success("A água prevista é potável!")
+        else:
+            st.error("A água prevista não é potável!")
         st.balloons()
