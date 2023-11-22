@@ -7,8 +7,6 @@ st.title("Relações")
 base = df_agua
 corr = base.corr().reset_index().melt("index")
 
-col1, col2 = st.columns(2)
-
 heatmap = (
     alt.Chart(corr)
     .encode(
