@@ -13,9 +13,7 @@ strategies = {
     "Regressão Logística": LogisticRegression,
 }
 
-strategy = list(strategies.keys())[0]
-
-st.title(strategy)
+st.title("Modelo")
 
 strategy = str(st.selectbox("Selecione a estratégia", strategies.keys()))
 
@@ -38,4 +36,13 @@ with st.spinner("Carregando..."):
     y_pred = model.predict(x_test)
     accuracy = accuracy_score(y_test, y_pred)
 
-    st.metric("Acurácia", f"{(accuracy * 100):.2f}%")
+    if not "last_accuracy" in st.session_state:
+        st.session_state["last_accuracy"] = 0
+
+    if st.session_state["last_accuracy"] == 0:
+        st.session_state["last_accuracy"] = accuracy
+
+    delta = float(accuracy - st.session_state["last_accuracy"])
+    st.session_state["last_accuracy"] = accuracy
+
+    st.metric("Acurácia", f"{(accuracy * 100):.2f}%", f"{(delta * 100):.2f}%")
