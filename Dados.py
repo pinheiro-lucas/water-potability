@@ -1,9 +1,8 @@
 import streamlit as st
-import pandas as pd
 import altair as alt
+from agua import df_agua
 
-
-base = pd.read_csv("data/water_potability.csv")
+base = df_agua
 medidas = {
     "ph": "Quantidade de PH",
     "Hardness": "Quantidade de cálcio e magnésio dissolvido",
@@ -22,9 +21,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
-        "Get Help": "https://github.com/pinheiro-lucas/water-potability",
-        "Report a bug": "https://github.com/pinheiro-lucas/water-potability",
-        "About": "Teste",
+        "About": "https://github.com/pinheiro-lucas/water-potability",
     },
 )
 
