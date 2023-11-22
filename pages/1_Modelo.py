@@ -43,3 +43,16 @@ with st.spinner("Carregando..."):
     st.session_state["ultima_acuracia"] = acuracia
 
     st.metric("Acurácia", f"{(acuracia * 100):.2f}%", f"{(delta * 100):.2f}%")
+
+    st.header("Prever nova água")
+    input_values = []
+    for variavel in df.columns[:-1]:  # Excluindo a coluna 'Potability'
+        input_value = st.number_input(f"Insira o valor para {variavel}")
+        input_values.append(input_value)
+
+    # Botão para prever
+    if st.button("Prever"):
+        previsao = modelo.predict([input_values])[0]
+        resultado = "é potável" if previsao == 1 else "não é potável"
+        st.success(f"A água prevista {resultado}!")
+        st.balloons()
