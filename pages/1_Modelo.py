@@ -54,7 +54,6 @@ with st.spinner("Carregando..."):
     if st.button("Prever"):
         previsao = modelo.predict([input_values])[0]
         if (previsao == 1):
-            st.success("A água prevista é potável!")
+            st.success("A água prevista é potável!", icon="🚰")
         else:
-            st.error("A água prevista não é potável!")
-        st.balloons()
+            st.error("A água prevista não é potável!", icon="🚱")
