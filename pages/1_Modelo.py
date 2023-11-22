@@ -6,16 +6,6 @@ from sklearn.linear_model import LogisticRegression
 from agua import df_agua_balanceado, df_agua
 from sklearn.model_selection import train_test_split
 
-st.set_page_config(
-    page_title="Potabilidade da água",
-    page_icon="💦",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        "About": "https://github.com/pinheiro-lucas/water-potability",
-    },
-)
-
 estrategias = {
     "Floresta Aleatória": RandomForestClassifier,
     "Árvore de Decisão": DecisionTreeClassifier,
