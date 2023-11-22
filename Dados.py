@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+
 base = pd.read_csv("data/water_potability.csv")
 medidas = {
     "ph": "Quantidade de PH",
@@ -147,4 +148,4 @@ if tipo == "Não potáveis":
                 )
 
 with st.expander("Amostra dos dados brutos"):
-    st.dataframe(base)
+    st.dataframe(base, use_container_width=True)
