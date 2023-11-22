@@ -27,6 +27,9 @@ medidas = {
 
 st.title("Potabilidade da água")
 
+with st.expander("Amostra dos dados brutos"):
+    st.dataframe(base, use_container_width=True)
+
 with st.expander("Quantidade de amostras", True):
     tipo = st.selectbox(
         "Selecione o tipo de amostras", ["Todas", "Potáveis", "Não potáveis"]
@@ -159,6 +162,3 @@ with st.expander("Quantidade de amostras", True):
                         )
                         .interactive()
                     )
-
-with st.expander("Amostra dos dados brutos"):
-    st.dataframe(base, use_container_width=True)
